@@ -77,13 +77,14 @@ public class Register extends AppCompatActivity {
 
                     loader.setMessage("Registration in progress");
                     loader.setCanceledOnTouchOutside(false);
+                    loader.show();
 
                     Fau.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful())
                             {
-                                Intent intent = new Intent(Register.this, HomeActivity.class);
+                                Intent intent = new Intent(Register.this, Home.class);
                                 startActivity(intent);
                                 finish();
                                 loader.dismiss();

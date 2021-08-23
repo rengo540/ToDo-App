@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#E18709"
+    android:background="#E88106"
     tools:context=".Register">
 
 
@@ -14,7 +14,7 @@
         android:id="@+id/registerToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#fff"
+        android:background="#E88106"
         app:titleTextColor="#000"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
@@ -34,7 +34,7 @@
         android:id="@+id/registerEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="enter your email"
+        android:hint="Enter your email."
         android:textColor="#000"
         android:textColorHint="#000"
         android:background="@drawable/inputs"
@@ -51,7 +51,7 @@
         android:id="@+id/registerPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="enter your password"
+        android:hint="Enter your password."
         android:layout_margin="10dp"
         android:textColor="#fff"
         android:textColorHint="#000"
@@ -67,19 +67,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="register"
+        android:textSize="18dp"
+        android:textStyle="bold"
         android:textColor="#000"
+        android:background="@color/white"
         android:textAllCaps="false"
         android:layout_margin="10dp"
-        android:background="#271010"
         />
-
     <TextView
         android:id="@+id/registerPageQuestion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
         android:layout_marginTop="8dp"
-        android:text=" already have an account? Login."
+        android:text=" Already have an account? Login."
         android:textColor="#000"
         android:textSize="14.5dp" />
 

@@ -1,6 +1,7 @@
 package com.example.todo;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -21,13 +22,19 @@ import com.example.todo.model.Task;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-public class Home extends AppCompatActivity {
+public class Home extends AppCompatActivity implements Adapter.RecyclerViewClickListener {
     Toolbar toolbar;
     RecyclerView recyclerView ;
     FloatingActionButton floatingActionButton ;
@@ -35,15 +42,26 @@ public class Home extends AppCompatActivity {
    DatabaseReference reference ;
    FirebaseAuth auth ;
 
-private ProgressDialog loader ;
+   private ProgressDialog loader ;
+   Adapter adapter ;
+   List<Task> list ;
+    String onlineUserId;
+
+    private Adapter.RecyclerViewClickListener listener;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_layout);
 
+
+
         toolbar=findViewById(R.id.homeToolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Home");
+
+
 
         recyclerView = findViewById(R.id.homeRecycler);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -52,9 +70,63 @@ private ProgressDialog loader ;
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
 
+
       auth=FirebaseAuth.getInstance();
-      String onlineUserId = auth.getCurrentUser().getUid();
+      onlineUserId = auth.getCurrentUser().getUid();
       reference=FirebaseDatabase.getInstance().getReference().child("tasks").child(onlineUserId);
+
+
+      listener = new Adapter.RecyclerViewClickListener() {
+          @Override
+          public void onClick(View view, int position) {
+
+              String p = position+"";
+
+                  Toast.makeText(Home.this,"pos "+ p , Toast.LENGTH_SHORT).show();
+
+
+
+          }
+      };
+
+
+
+
+      list = new ArrayList<>();
+      adapter = new Adapter();
+      adapter.setList(list,listener);
+      recyclerView.setAdapter(adapter);
+
+      reference.addChildEventListener(new ChildEventListener() {
+          @Override
+          public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+              Task ttask = snapshot.getValue(Task.class);
+              list.add(ttask);
+              adapter.notifyDataSetChanged();
+
+          }
+
+          @Override
+          public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+          }
+
+          @Override
+          public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+          }
+
+          @Override
+          public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+          }
+
+          @Override
+          public void onCancelled(@NonNull DatabaseError error) {
+
+          }
+      });
+
 
       loader= new ProgressDialog(this);
 
@@ -64,11 +136,20 @@ private ProgressDialog loader ;
             @Override
             public void onClick(View v) {
                 addTask();
-
             }
         });
 
+
+
+
+
+
+
     }
+
+
+
+
 
     private void addTask() {
         AlertDialog.Builder mydialog = new AlertDialog.Builder(this);
@@ -137,14 +218,14 @@ private ProgressDialog loader ;
                             }
                         }
                     });
-
-
-
                 }
-
-
             }
         });
+
+    }
+
+    @Override
+    public void onClick(View view, int position) {
 
     }
 }

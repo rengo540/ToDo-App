@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.graphics.ColorSpace;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.example.todo.model.Task;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.transition.Hold;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -46,6 +48,9 @@ public class Home extends AppCompatActivity implements Adapter.RecyclerViewClick
    Adapter adapter ;
    List<Task> list ;
     String onlineUserId;
+    String key="";
+    String task;
+    String description;
 
     private Adapter.RecyclerViewClickListener listener;
 
@@ -80,11 +85,11 @@ public class Home extends AppCompatActivity implements Adapter.RecyclerViewClick
           @Override
           public void onClick(View view, int position) {
 
-              String p = position+"";
+              key=list.get(position).getId();
+              task=list.get(position).getTask();
+              description=list.get(position).getDescription();
 
-                  Toast.makeText(Home.this,"pos "+ p , Toast.LENGTH_SHORT).show();
-
-
+              updateTask();
 
           }
       };
@@ -150,6 +155,85 @@ public class Home extends AppCompatActivity implements Adapter.RecyclerViewClick
 
 
 
+
+    private void updateTask(){
+        AlertDialog.Builder mydialog=new AlertDialog.Builder(this);
+        LayoutInflater inflater=LayoutInflater.from(this);
+        View view=inflater.inflate(R.layout.update_data,null);
+        mydialog.setView(view);
+        AlertDialog dialog=mydialog.create();
+
+        EditText mTask=view.findViewById(R.id.mEditTextTask);
+        EditText mDescription=view.findViewById(R.id.mEditTextDescription);
+
+        mTask.setText(task);
+        mTask.setSelection(task.length());
+
+
+        mDescription.setText(description);
+        mDescription.setSelection(description.length());
+
+        Button delButton= view.findViewById(R.id.btnDelete);
+        Button updateButton=view.findViewById(R.id.btnUpdate);
+
+        updateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                task=mTask.getText().toString().trim();
+                description=mDescription.getText().toString().trim();
+
+                String date =DateFormat.getDateInstance().format(new Date());
+
+                Task model=new Task(task,description,key,date);
+
+                reference.child(key).setValue(model).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull com.google.android.gms.tasks.Task<Void> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText( Home.this,"data has been updated sucessfully", Toast.LENGTH_SHORT).show();
+                        }else{
+                            String err=task.getException().toString();
+                            Toast.makeText(Home.this, "update failed"+err, Toast.LENGTH_SHORT).show();
+
+
+                        }
+                    }
+                });
+
+
+                dialog.dismiss();
+
+            }
+        });
+
+        delButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                reference.child(key).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull com.google.android.gms.tasks.Task<Void> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(Home.this, "deleted successfully", Toast.LENGTH_SHORT).show();
+                        }else{
+                            String err=task.getException().toString();
+                            Toast.makeText(Home.this, "failled to delete task  "+err, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+
+
+
+
+                dialog.dismiss();
+
+            }
+        });
+
+        dialog.show();
+
+    }
 
     private void addTask() {
         AlertDialog.Builder mydialog = new AlertDialog.Builder(this);

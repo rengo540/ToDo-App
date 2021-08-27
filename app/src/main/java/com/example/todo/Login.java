@@ -41,6 +41,9 @@ public class Login extends AppCompatActivity {
         auth=FirebaseAuth.getInstance();
         loader=new ProgressDialog(this);
 
+
+
+
         loginEmail=findViewById(R.id.loginEmail);
         loginPwd=findViewById(R.id.loginPassword);
         loginBtn=findViewById(R.id.loginButton);

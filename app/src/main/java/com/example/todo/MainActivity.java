@@ -11,12 +11,16 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final int splash=2400;
     Animation topanim,bottomanim;
     ImageView imagee;
     TextView textView;
+    FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,16 +35,38 @@ public class MainActivity extends AppCompatActivity {
         imagee.setAnimation(topanim);
         textView.setAnimation(bottomanim);
 
-        new Handler().postDelayed(new Runnable() {
+        auth=FirebaseAuth.getInstance();
+
+
+        /*new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 Intent intent=new Intent(MainActivity.this,Login.class);
                 startActivity(intent);
                 finish();
             }
-        },splash);
+        },splash);*/
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser firebaseUser= auth.getCurrentUser();
+        if(firebaseUser !=null){
+            Intent intent=new Intent(MainActivity.this,Home.class);
+            startActivity(intent);
 
+        }else{
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent=new Intent(MainActivity.this,Login.class);
+                    startActivity(intent);
+                    finish();
+                }
+            },splash);
+
+        }
     }
+}

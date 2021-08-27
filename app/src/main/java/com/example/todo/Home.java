@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.graphics.ColorSpace;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.example.todo.model.Task;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.transition.Hold;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -40,12 +42,18 @@ public class Home extends AppCompatActivity implements Adapter.RecyclerViewClick
     FloatingActionButton floatingActionButton ;
 
    DatabaseReference reference ;
+
    FirebaseAuth auth ;
 
    private ProgressDialog loader ;
    Adapter adapter ;
    List<Task> list ;
     String onlineUserId;
+    String key="";
+    String task;
+    String description;
+
+    int pos ;
 
     private Adapter.RecyclerViewClickListener listener;
 
@@ -74,20 +82,25 @@ public class Home extends AppCompatActivity implements Adapter.RecyclerViewClick
       auth=FirebaseAuth.getInstance();
       onlineUserId = auth.getCurrentUser().getUid();
       reference=FirebaseDatabase.getInstance().getReference().child("tasks").child(onlineUserId);
-
+      loader= new ProgressDialog(this);
 
       listener = new Adapter.RecyclerViewClickListener() {
           @Override
           public void onClick(View view, int position) {
 
-              String p = position+"";
+              pos = position;
 
-                  Toast.makeText(Home.this,"pos "+ p , Toast.LENGTH_SHORT).show();
 
+              key=list.get(position).getId();
+              task=list.get(position).getTask();
+              description=list.get(position).getDescription();
+
+              updateTask();
 
 
           }
       };
+
 
 
 
@@ -103,16 +116,23 @@ public class Home extends AppCompatActivity implements Adapter.RecyclerViewClick
               Task ttask = snapshot.getValue(Task.class);
               list.add(ttask);
               adapter.notifyDataSetChanged();
-
           }
 
           @Override
           public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+              list.remove(pos);
+              Task editTask = snapshot.getValue(Task.class);
+              list.add(pos,editTask);
+              adapter.notifyDataSetChanged();
 
           }
 
           @Override
           public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+              //Task removedTask = snapshot.getValue(Task.class);
+              list.remove(pos);
+              adapter.notifyDataSetChanged();
 
           }
 
@@ -128,9 +148,6 @@ public class Home extends AppCompatActivity implements Adapter.RecyclerViewClick
       });
 
 
-      loader= new ProgressDialog(this);
-
-
         floatingActionButton = findViewById(R.id.floatingBtn);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,13 +156,92 @@ public class Home extends AppCompatActivity implements Adapter.RecyclerViewClick
             }
         });
 
+    }
 
 
 
 
 
+
+    private void updateTask(){
+        AlertDialog.Builder mydialog=new AlertDialog.Builder(this);
+        LayoutInflater inflater=LayoutInflater.from(this);
+        View view=inflater.inflate(R.layout.update_data,null);
+        mydialog.setView(view);
+        AlertDialog dialog=mydialog.create();
+
+        EditText mTask=view.findViewById(R.id.mEditTextTask);
+        EditText mDescription=view.findViewById(R.id.mEditTextDescription);
+
+        mTask.setText(task);
+        mTask.setSelection(task.length());
+
+
+        mDescription.setText(description);
+        mDescription.setSelection(description.length());
+
+        Button delButton= view.findViewById(R.id.btnDelete);
+        Button updateButton=view.findViewById(R.id.btnUpdate);
+
+        updateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                task=mTask.getText().toString().trim();
+                description=mDescription.getText().toString().trim();
+
+                String date =DateFormat.getDateInstance().format(new Date());
+
+                Task model=new Task(task,description,key,date);
+
+                reference.child(key).setValue(model).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull com.google.android.gms.tasks.Task<Void> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText( Home.this,"data has been updated sucessfully", Toast.LENGTH_SHORT).show();
+                        }else{
+                            String err=task.getException().toString();
+                            Toast.makeText(Home.this, "update failed"+err, Toast.LENGTH_SHORT).show();
+
+
+                        }
+                    }
+                });
+
+
+                dialog.dismiss();
+
+            }
+        });
+
+        delButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                reference.child(key).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull com.google.android.gms.tasks.Task<Void> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(Home.this, "deleted successfully", Toast.LENGTH_SHORT).show();
+                        }else{
+                            String err=task.getException().toString();
+                            Toast.makeText(Home.this, "failled to delete task  "+err, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+
+
+
+
+                dialog.dismiss();
+
+            }
+        });
+
+        dialog.show();
 
     }
+
 
 
 

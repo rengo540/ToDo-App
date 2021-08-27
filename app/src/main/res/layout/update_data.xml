@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/black">
 
     <TextView
         android:layout_width="match_parent"
@@ -11,7 +12,7 @@
         android:layout_margin="10dp"
         android:text="update your task"
         android:layout_gravity="center"
-        android:background="#E44646"
+        android:background="#F44500"
         android:textColor="#fff"
         android:padding="10dp"
         android:textSize="18sp"
@@ -31,10 +32,14 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="task"
-                android:textStyle="bold"
-                android:textColor="#000"
-                android:layout_margin="10dp"/>
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="Task"
+                android:textColor="#fff"
+                android:textSize="18.5dp"
+                android:textStyle="bold" />
 
         </RelativeLayout>
 
@@ -51,9 +56,10 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
-                android:hint="task"
-                android:textColor="#000"
-                android:textColorHint="#000"
+                android:hint="task..."
+                android:textColor="#fff"
+                android:textColorHint="#fff"
+                android:textSize="16dp"
                 android:textStyle="bold" />
 
         </RelativeLayout>
@@ -75,10 +81,14 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
                 android:text="Description"
-                android:textStyle="bold"
-                android:textColor="#000"
-                android:layout_margin="10dp"/>
+                android:textColor="#fff"
+                android:textSize="18dp"
+                android:textStyle="bold" />
 
         </RelativeLayout>
 
@@ -95,9 +105,10 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
-                android:hint="Description"
-                android:textColor="#000"
-                android:textColorHint="#000"
+                android:hint="Description.."
+                android:textColor="#fff"
+                android:textColorHint="#fff"
+                android:textSize="16dp"
                 android:textStyle="bold" />
 
         </RelativeLayout>

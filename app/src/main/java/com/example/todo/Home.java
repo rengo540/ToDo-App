@@ -40,12 +40,14 @@ public class Home extends AppCompatActivity implements Adapter.RecyclerViewClick
     FloatingActionButton floatingActionButton ;
 
    DatabaseReference reference ;
+
    FirebaseAuth auth ;
 
    private ProgressDialog loader ;
    Adapter adapter ;
    List<Task> list ;
     String onlineUserId;
+
 
     private Adapter.RecyclerViewClickListener listener;
 
@@ -80,11 +82,6 @@ public class Home extends AppCompatActivity implements Adapter.RecyclerViewClick
           @Override
           public void onClick(View view, int position) {
 
-              String p = position+"";
-
-                  Toast.makeText(Home.this,"pos "+ p , Toast.LENGTH_SHORT).show();
-
-
 
           }
       };
@@ -103,11 +100,11 @@ public class Home extends AppCompatActivity implements Adapter.RecyclerViewClick
               Task ttask = snapshot.getValue(Task.class);
               list.add(ttask);
               adapter.notifyDataSetChanged();
-
           }
 
           @Override
           public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
 
           }
 
@@ -138,12 +135,6 @@ public class Home extends AppCompatActivity implements Adapter.RecyclerViewClick
                 addTask();
             }
         });
-
-
-
-
-
-
 
     }
 

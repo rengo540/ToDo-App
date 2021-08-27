@@ -3,17 +3,25 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/ToDo-App/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.12129629629629629" />
+        <entry key="..\:/ToDo-App/app/src/main/res/drawable/ic_baseline_email_24.xml" value="0.12129629629629629" />
         <entry key="..\:/ToDo-App/app/src/main/res/layout/activity_home.xml" value="0.22644927536231885" />
         <entry key="..\:/ToDo-App/app/src/main/res/layout/activity_main.xml" value="0.22644927536231885" />
         <entry key="..\:/ToDo-App/app/src/main/res/layout/home_layout.xml" value="0.27314814814814814" />
+        <entry key="..\:/ToDo-App/app/src/main/res/layout/input_file.xml" value="0.20631067961165048" />
         <entry key="..\:/ToDo-App/app/src/main/res/layout/login_layout.xml" value="0.20018115942028986" />
         <entry key="..\:/ToDo-App/app/src/main/res/layout/register_layout.xml" value="0.264" />
+
+        <entry key="..\:/ToDo-App/app/src/main/res/layout/retrived_data.xml" value="0.2" />
+        <entry key="..\:/ToDo-App/app/src/main/res/layout/update_data.xml" value="0.14175724637681159" />
+
         <entry key="..\:/Users/dell/Downloads/My-Githup/ToDo-App/app/src/main/res/drawable/inputs.xml" value="0.18645833333333334" />
         <entry key="..\:/Users/dell/Downloads/My-Githup/ToDo-App/app/src/main/res/layout/activity_home.xml" value="0.1265625" />
         <entry key="..\:/Users/dell/Downloads/My-Githup/ToDo-App/app/src/main/res/layout/activity_main.xml" value="0.1265625" />
         <entry key="..\:/Users/dell/Downloads/My-Githup/ToDo-App/app/src/main/res/layout/home_layout.xml" value="0.152" />
         <entry key="..\:/Users/dell/Downloads/My-Githup/ToDo-App/app/src/main/res/layout/input_file.xml" value="0.1265625" />
         <entry key="..\:/Users/dell/Downloads/My-Githup/ToDo-App/app/src/main/res/layout/update_data.xml" value="0.264" />
+
       </map>
     </option>
   </component>

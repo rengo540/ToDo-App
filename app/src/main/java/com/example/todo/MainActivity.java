@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int splash=2200;
+    private static final int splash=2400;
     Animation topanim,bottomanim;
     ImageView imagee;
     TextView textView;

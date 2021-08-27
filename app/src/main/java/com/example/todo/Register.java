@@ -38,7 +38,7 @@ public class Register extends AppCompatActivity {
 
         toolbar=findViewById(R.id.registerToolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Registerrrrrr");
+        getSupportActionBar().setTitle("Register");
 
         Fau = FirebaseAuth.getInstance();
         loader = new ProgressDialog(this);

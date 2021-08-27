@@ -2,15 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/black">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="#E44646"
+        android:background="#F44500"
         android:gravity="center"
-        android:text="add a new task"
+        android:text="Add a new task."
         android:padding="10dp"
         android:textColor="#fff"
         android:textStyle="bold"
@@ -25,12 +26,17 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
                 android:text="task"
-                android:textStyle="bold"
-                android:layout_margin="10dp"/>
+                android:textColor="@color/white"
+                android:textStyle="bold" />
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="0dp"
@@ -47,7 +53,8 @@
                 android:layout_marginBottom="10dp"
                 android:hint="task"
                 android:text="task..."
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="@color/white"/>
         </RelativeLayout>
     </LinearLayout>
 
@@ -70,7 +77,8 @@
                 android:layout_marginBottom="10dp"
                 android:text="description"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="@color/white"/>
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="0dp"
@@ -87,7 +95,7 @@
                 android:layout_marginBottom="10dp"
                 android:hint="description"
                 android:text="description..."
-                android:textColor="#000"
+                android:textColor="#fff"
                 android:textColorHint="#000"
                 android:textStyle="bold" />
         </RelativeLayout>
@@ -136,7 +144,8 @@
                 android:textAllCaps="false"
                 android:textColor="#fff"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                />
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

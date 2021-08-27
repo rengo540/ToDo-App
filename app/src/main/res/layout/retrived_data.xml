@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:text="task"
-                android:textSize="15sp"
+                android:textSize="16.5sp"
                 android:textStyle="bold"
                 android:padding="5dp"
                 android:maxLines="1"

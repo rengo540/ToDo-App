@@ -30,7 +30,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.taskVH> {
 
     class taskVH extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView textViewTaskTitle, textViewDescription;
+        TextView textViewTaskTitle, textViewDescription , textViewDate;
 
 
         public taskVH(@NonNull View itemView) {
@@ -39,6 +39,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.taskVH> {
 
             textViewTaskTitle = itemView.findViewById(R.id.taskTv);
             textViewDescription = itemView.findViewById(R.id.descriptionTv);
+            textViewDate = itemView.findViewById(R.id.dateTv);
             itemView.setOnClickListener(this);
 
 
@@ -68,8 +69,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.taskVH> {
     public void onBindViewHolder(@NonNull taskVH holder, int position) {
 
         holder.textViewTaskTitle.setText(tasks.get(position).getTask());
-
         holder.textViewDescription.setText(tasks.get(position).getDescription());
+        holder.textViewDate.setText(tasks.get(position).getDate());
+
 
 
     }

@@ -42,6 +42,7 @@ public class Home extends AppCompatActivity implements Adapter.RecyclerViewClick
     FloatingActionButton floatingActionButton ;
 
    DatabaseReference reference ;
+
    FirebaseAuth auth ;
 
    private ProgressDialog loader ;
@@ -51,6 +52,8 @@ public class Home extends AppCompatActivity implements Adapter.RecyclerViewClick
     String key="";
     String task;
     String description;
+
+    int pos ;
 
     private Adapter.RecyclerViewClickListener listener;
 
@@ -79,11 +82,14 @@ public class Home extends AppCompatActivity implements Adapter.RecyclerViewClick
       auth=FirebaseAuth.getInstance();
       onlineUserId = auth.getCurrentUser().getUid();
       reference=FirebaseDatabase.getInstance().getReference().child("tasks").child(onlineUserId);
-
+      loader= new ProgressDialog(this);
 
       listener = new Adapter.RecyclerViewClickListener() {
           @Override
           public void onClick(View view, int position) {
+
+              pos = position;
+
 
               key=list.get(position).getId();
               task=list.get(position).getTask();
@@ -91,8 +97,10 @@ public class Home extends AppCompatActivity implements Adapter.RecyclerViewClick
 
               updateTask();
 
+
           }
       };
+
 
 
 
@@ -108,16 +116,23 @@ public class Home extends AppCompatActivity implements Adapter.RecyclerViewClick
               Task ttask = snapshot.getValue(Task.class);
               list.add(ttask);
               adapter.notifyDataSetChanged();
-
           }
 
           @Override
           public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+              list.remove(pos);
+              Task editTask = snapshot.getValue(Task.class);
+              list.add(pos,editTask);
+              adapter.notifyDataSetChanged();
 
           }
 
           @Override
           public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+              //Task removedTask = snapshot.getValue(Task.class);
+              list.remove(pos);
+              adapter.notifyDataSetChanged();
 
           }
 
@@ -133,9 +148,6 @@ public class Home extends AppCompatActivity implements Adapter.RecyclerViewClick
       });
 
 
-      loader= new ProgressDialog(this);
-
-
         floatingActionButton = findViewById(R.id.floatingBtn);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,13 +156,8 @@ public class Home extends AppCompatActivity implements Adapter.RecyclerViewClick
             }
         });
 
-
-
-
-
-
-
     }
+
 
 
 
@@ -234,6 +241,11 @@ public class Home extends AppCompatActivity implements Adapter.RecyclerViewClick
         dialog.show();
 
     }
+
+
+
+
+
 
     private void addTask() {
         AlertDialog.Builder mydialog = new AlertDialog.Builder(this);

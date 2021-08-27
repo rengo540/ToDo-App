@@ -148,13 +148,19 @@ public class Home extends AppCompatActivity implements Adapter.RecyclerViewClick
       });
 
 
+
+
+
         floatingActionButton = findViewById(R.id.floatingBtn);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 addTask();
             }
         });
+
+
 
     }
 

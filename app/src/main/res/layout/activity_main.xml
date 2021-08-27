@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#6472C5"
+    android:background="#8FBC8F"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -14,7 +14,7 @@
         android:layout_height="300dp"
         android:layout_gravity="center"
         android:layout_marginTop="100dp"
-        android:src="@drawable/myimage" />
+        android:src="@drawable/sss" />
 
 
     <TextView
@@ -23,6 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="TO-DO LIST"
+        android:layout_margin="15dp"
         android:textColor="#000"
         android:textSize="28sp"
         android:textStyle="bold"

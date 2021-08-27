@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#E18709"
+    android:background="#8FBC8F"
     tools:context=".Register">
 
 
@@ -14,7 +14,7 @@
         android:id="@+id/loginToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#fff"
+        android:background="#8FBC8F"
         app:titleTextColor="#000"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
@@ -24,7 +24,7 @@
     <ImageView
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:src="@drawable/img"
+        android:src="@drawable/sss"
         android:layout_marginTop="70dp"
         android:layout_gravity="center"
         />
@@ -34,10 +34,10 @@
         android:id="@+id/loginEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="enter your email"
+        android:hint="Enter your email."
         android:textColor="#000"
         android:textColorHint="#000"
-        android:background="@drawable/inputs"
+        android:background="@color/white"
         android:padding="10dp"
         android:inputType="textEmailAddress"
         android:layout_marginTop="50dp"
@@ -51,11 +51,11 @@
         android:id="@+id/loginPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="enter your password"
+        android:hint="Enter your password."
         android:layout_margin="10dp"
         android:textColor="#fff"
         android:textColorHint="#000"
-        android:background="@drawable/inputs"
+        android:background="@color/white"
         android:padding="10dp"
         android:inputType="textPassword"
         android:drawableStart="@drawable/ic_baseline_lock_24"
@@ -67,12 +67,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Login"
-        android:textSize="20sp"
+        android:textSize="19dp"
         android:textStyle="bold"
-        android:textColor="#000"
+        android:textColor="#fff"
         android:textAllCaps="false"
         android:layout_margin="10dp"
-        android:background="#271010"
+        android:background="@color/black"
         />
 
     <TextView
@@ -81,9 +81,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
         android:layout_marginTop="8dp"
-        android:text=" You don't have an account? register."
+        android:text=" You don't have an account? Register."
         android:textColor="#000"
-        android:textSize="15sp" />
+        android:textSize="15dp" />
 
 
 </LinearLayout>

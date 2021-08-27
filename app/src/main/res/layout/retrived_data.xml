@@ -6,7 +6,8 @@
     app:cardElevation="10dp"
     android:layout_margin="10dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/white">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,7 +25,7 @@
                 android:textColor="#fff"
                 android:text="june 18,2020"
                 android:gravity="center"
-                android:background="#E88106"
+                android:background="#F44500"
                 android:padding="10dp"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
